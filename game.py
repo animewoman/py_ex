@@ -60,7 +60,7 @@ def main():
         print("Round № {}".format(game.count_rounds))
         a = int(input_data())
         x = game.right_or_left(a)
-        if (x != "right") or (x != "left"):
+        if (x != "right") and (x != "left"):
             print(x.format(game.count_rounds))
             win = True
             break
