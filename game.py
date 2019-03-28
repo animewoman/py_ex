@@ -17,12 +17,11 @@ class Game(object):
 
     def right_or_left(self, num):
         if num == self.rand_prime_num:
-            print(words.end.format(self.count_rounds))
-            exit(0)
+            return words.end
         elif num > self.rand_prime_num:
-            print("left")
+            return "left"
         else:
-            print("right")
+            return "right"
 
 
 def input_data():
@@ -55,13 +54,21 @@ def main():
     print(words.start)
     game = Game()
     print(words.number_guessed)
-    while game.count_rounds <= 10:
+    win = False
+    while game.count_rounds < 10:
         game.cont()
         print(f"Round №{game.count_rounds}")
         a = int(input_data())
-        game.right_or_left(a)
+        x = game.right_or_left(a)
+        if (x != "right") or (x != "left"):
+            print(x.format(game.count_rounds))
+            win = True
+            break
+        else:
+            print(x)
 
-    print("You lost")
+    if win is False:
+        print("You lost")
 
 
 main()
