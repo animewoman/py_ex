@@ -25,13 +25,21 @@ class Game(object):
             print("right")
 
 
-def input_data(a):
-    if (a >= 0) and (a <= 100):
-        return a
-    else:
-        print(words.not_in_range)
-        a = int(input(words.inp))
-        return input_data(a)
+def input_data():
+    while True:
+        print(words.next_round)
+        a = (input(words.inp))
+        try:
+            a = int(a)
+        except ValueError:
+            print("That's not an integer!")
+            continue
+        else:
+            if (a >= 0) and (a <= 100):
+                return a
+            else:
+                print(words.not_in_range)
+                return input_data()
 
 
 def main():
@@ -41,9 +49,7 @@ def main():
     while game.count_rounds <= 10:
         game.cont()
         print(f"Round №{game.count_rounds}")
-        print(words.next_round)
-        a = int(input(words.inp))
-        a = input_data(a)
+        a = input_data()
         game.right_or_left(a)
 
     print("You lost")
