@@ -57,7 +57,7 @@ def main():
     win = False
     while game.count_rounds < 10:
         game.cont()
-        print(f"Round №{game.count_rounds}")
+        print("Round № {}".format(game.count_rounds))
         a = int(input_data())
         x = game.right_or_left(a)
         if (x != "right") or (x != "left"):
