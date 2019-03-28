@@ -8,7 +8,7 @@ words = WORDSFORGAME
 class Game(object):
 
     def __init__(self):
-        temp = random.randint(0, 25)
+        temp = random.randint(0, len(prime_nums) - 1)
         self.rand_prime_num = prime_nums[temp]
         self.count_rounds = 0
 
@@ -29,17 +29,26 @@ def input_data():
     while True:
         print(words.next_round)
         a = (input(words.inp))
-        try:
-            a = int(a)
-        except ValueError:
-            print("That's not an integer!")
-            continue
+        if a == input_try(a):
+            a = int(input_try(a))
+            break
         else:
-            if (a >= 0) and (a <= 100):
-                return a
-            else:
-                print(words.not_in_range)
-                return input_data()
+            continue
+    return a
+
+
+def input_try(a):
+    try:
+        a = int(a)
+    except ValueError:
+        print("That's not number")
+        return a + '10'
+    else:
+        if (a >= 0) and (a <= 100):
+            return str(a)
+        else:
+            print(words.not_in_range)
+            return a + 10
 
 
 def main():
@@ -49,7 +58,7 @@ def main():
     while game.count_rounds <= 10:
         game.cont()
         print(f"Round №{game.count_rounds}")
-        a = input_data()
+        a = int(input_data())
         game.right_or_left(a)
 
     print("You lost")
